@@ -9,22 +9,23 @@
 import SwiftUI
 class EmojiMemoryGame {
     private var game: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
-    
     static func createMemoryGame() -> MemoryGame<String> {
         let emojis = [
             "👻",
             "🕷",
             "👽",
             "💀",
+            "👹",
+            "🧚🏼‍♀️",
         ];
-        
-        return MemoryGame<String>(numPairs: emojis.count) { index  in
+        let numPairs = Int.random(in: 0 ..< emojis.count)
+        return MemoryGame<String>(numPairs: numPairs) { index  in
             return emojis[index]
         }
     }
     
     var cards: Array<MemoryGame<String>.Card> {
-        return game.cards
+        return game.cards.shuffled()
     }
     
     func choose(card: MemoryGame<String>.Card) {

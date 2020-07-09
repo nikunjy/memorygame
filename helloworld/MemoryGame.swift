@@ -21,7 +21,7 @@ struct MemoryGame<CardContent> {
     }
     
     func choose(card: Card) {
-        print("chose \(card)")
+        print("oh yeah chose \(card)")
     }
     
     struct Card: Identifiable{

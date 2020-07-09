@@ -11,7 +11,11 @@ import SwiftUI
 struct ContentView: View {
     var game = EmojiMemoryGame()
     var body: some View {
-        HStack{
+        var font = Font.largeTitle
+        if game.cards.count >= 5 {
+            font = Font.title
+        }
+        return HStack{
             ForEach(game.cards) { card in
                 CardView(card: card).onTapGesture(perform: {
                     self.game.choose(card: card)
@@ -19,8 +23,8 @@ struct ContentView: View {
             }
         }
         .padding()
-        .aspectRatio(5/3, contentMode: ContentMode.fit)
-        .font(Font.largeTitle)
+        .aspectRatio(2/3, contentMode: ContentMode.fit)
+        .font(font)
         .foregroundColor(Color.orange)
     }
     
