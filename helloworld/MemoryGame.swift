@@ -31,7 +31,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
         return 0
     }
     
-    var lastChosen: Int?
+    // Another optional it can be nil or a value
+    var lastChosenIndex: Int?
     
     mutating func choose(card: Card) {
         let idx = cards.firstIndex(card)!
@@ -42,11 +43,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
         
         reset()
         cards[idx].faceup()
-        if lastChosen == nil {
-            lastChosen = idx
+        if lastChosenIndex == nil {
+            lastChosenIndex = idx
             return
         }
-        let last  = lastChosen!
+        
+        let last  = lastChosenIndex!
         if cards[last].content == cards[idx].content {
             cards[last].isMatched = true
             cards[idx].isMatched = true
@@ -55,7 +57,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
             scoreNum -= 1
         }
         cards[last].faceup()
-        lastChosen = nil
+        lastChosenIndex = nil
     }
     
     func score() -> Int {
@@ -87,12 +89,6 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
                 card.isFaceUp = false
             }
             return card
-        }
-        
-        func matched() -> Card {
-            var ret = self
-            ret.isMatched = true
-            return ret
         }
         var id: Int
     }

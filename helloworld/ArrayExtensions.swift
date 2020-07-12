@@ -8,6 +8,8 @@
 
 import Foundation
 extension Array where Element: Identifiable {
+    //  Int? is an optional, it can take the actual value
+    // or be nil
     func firstIndex(_ of: Element) -> Int?  {
         for idx in 0..<self.count {
             if self[idx].id == of.id {
