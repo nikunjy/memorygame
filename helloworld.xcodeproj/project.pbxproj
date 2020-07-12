@@ -18,6 +18,10 @@
 		BDD40EE524B5866D00B55773 /* helloworldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD40EE424B5866D00B55773 /* helloworldUITests.swift */; };
 		BDD40EF924B6C24400B55773 /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD40EF824B6C24400B55773 /* EmojiMemoryGame.swift */; };
 		BDD40EFB24B6CDC800B55773 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD40EFA24B6CDC800B55773 /* MemoryGame.swift */; };
+		BDD40EFD24B9654300B55773 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD40EFC24B9654200B55773 /* GridLayout.swift */; };
+		BDD40EFF24B966AC00B55773 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD40EFE24B966AC00B55773 /* Grid.swift */; };
+		BDD40F0124B9731000B55773 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD40F0024B9731000B55773 /* ArrayExtensions.swift */; };
+		BDD40F0324BA249800B55773 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD40F0224BA249800B55773 /* Themes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,10 @@
 		BDD40EE624B5866D00B55773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDD40EF824B6C24400B55773 /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		BDD40EFA24B6CDC800B55773 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
+		BDD40EFC24B9654200B55773 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		BDD40EFE24B966AC00B55773 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		BDD40F0024B9731000B55773 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		BDD40F0224BA249800B55773 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,9 +115,13 @@
 			children = (
 				BDD40EBF24B5866A00B55773 /* AppDelegate.swift */,
 				BDD40EC124B5866A00B55773 /* SceneDelegate.swift */,
+				BDD40EFC24B9654200B55773 /* GridLayout.swift */,
+				BDD40EFE24B966AC00B55773 /* Grid.swift */,
 				BDD40EC624B5866A00B55773 /* MemoryGameView.swift */,
 				BDD40EFA24B6CDC800B55773 /* MemoryGame.swift */,
 				BDD40EF824B6C24400B55773 /* EmojiMemoryGame.swift */,
+				BDD40F0224BA249800B55773 /* Themes.swift */,
+				BDD40F0024B9731000B55773 /* ArrayExtensions.swift */,
 				BDD40EC824B5866D00B55773 /* Assets.xcassets */,
 				BDD40ECD24B5866D00B55773 /* LaunchScreen.storyboard */,
 				BDD40ED024B5866D00B55773 /* Info.plist */,
@@ -279,8 +291,12 @@
 				BDD40EFB24B6CDC800B55773 /* MemoryGame.swift in Sources */,
 				BDD40EC024B5866A00B55773 /* AppDelegate.swift in Sources */,
 				BDD40EC224B5866A00B55773 /* SceneDelegate.swift in Sources */,
+				BDD40F0324BA249800B55773 /* Themes.swift in Sources */,
+				BDD40EFF24B966AC00B55773 /* Grid.swift in Sources */,
 				BDD40EC724B5866A00B55773 /* MemoryGameView.swift in Sources */,
 				BDD40EC524B5866A00B55773 /* helloworld.xcdatamodeld in Sources */,
+				BDD40EFD24B9654300B55773 /* GridLayout.swift in Sources */,
+				BDD40F0124B9731000B55773 /* ArrayExtensions.swift in Sources */,
 				BDD40EF924B6C24400B55773 /* EmojiMemoryGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

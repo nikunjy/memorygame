@@ -6,8 +6,9 @@
 //  Copyright © 2020 Nikunj Yadav. All rights reserved.
 //
 import Foundation
-struct MemoryGame<CardContent> {
+struct MemoryGame<CardContent> where CardContent: Equatable{
     var cards: Array<Card>
+    private var scoreNum = 0
     init(numPairs: Int, factory: (Int) -> CardContent) {
         cards = Array<Card>()
         for pairIndex in 0..<numPairs {
@@ -30,17 +31,68 @@ struct MemoryGame<CardContent> {
         return 0
     }
     
+    var lastChosen: Int?
+    
     mutating func choose(card: Card) {
-        cards[indexOf(card)].isFaceUp = !cards[indexOf(card)].isFaceUp
+        let idx = cards.firstIndex(card)!
+        
+        if cards[idx].isFaceUp || cards[idx].isMatched {
+            return
+        }
+        
+        reset()
+        cards[idx].faceup()
+        if lastChosen == nil {
+            lastChosen = idx
+            return
+        }
+        let last  = lastChosen!
+        if cards[last].content == cards[idx].content {
+            cards[last].isMatched = true
+            cards[idx].isMatched = true
+            scoreNum += 2
+        } else {
+            scoreNum -= 1
+        }
+        cards[last].faceup()
+        lastChosen = nil
     }
     
+    func score() -> Int {
+        self.scoreNum
+    }
+    
+    mutating func reset() {
+        cards = cards.map{card in
+            card.reset()
+        }
+    }
+
     struct Card: Identifiable{
-        var isFaceUp: Bool = true
+        var isFaceUp: Bool = false
         var isMatched: Bool = false
         var content: CardContent
         init(content: CardContent, id: Int) {
             self.content = content
             self.id = id
+        }
+        
+        mutating func faceup() {
+            self.isFaceUp = true
+        }
+        
+        func reset() -> Card {
+            var card = self
+            if !card.isMatched {
+                card.isFaceUp = false
+            }
+            return card
+        }
+        
+        func matched() -> Card {
+            var ret = self
+            ret.isMatched = true
+            return ret
         }
         var id: Int
     }
