@@ -35,7 +35,6 @@ struct MemoryGameView: View {
                 CardView(card: card).onTapGesture(perform: {
                     self.game.choose(card: card)
                 })
-                //.aspectRatio(2/3, contentMode: ContentMode.fit)
                 .padding()
                 .foregroundColor(self.game.cardColor())
             }
@@ -59,14 +58,13 @@ struct CardView: View {
     
     func render(size: CGSize) -> some View {
         ZStack {
-            if card.isMatched || card.isFaceUp {
-                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeWidth)
-                Text(card.content)
-            } else {
-                RoundedRectangle(cornerRadius: cornerRadius).fill()
-            }
-        }
+                Pie(
+                    startAngle: Angle.degrees(-90),
+                    endAngle: Angle.degrees(60),
+                    clockWise: true
+                ).padding(3).opacity(0.25)
+            Text(card.content)
+        }.cardify(isFaceUp: card.isFaceUp)
         .font(Font.system(size: fontSize(size)))
     }
     
@@ -74,9 +72,7 @@ struct CardView: View {
         return min(size.width, size.height) * fontScaleFactor
     }
     
-    let fontScaleFactor : CGFloat = 0.75
-    let cornerRadius: CGFloat = 10.0
-    let edgeWidth: CGFloat = 3
+    let fontScaleFactor : CGFloat = 0.65
 }
 
 
@@ -85,6 +81,8 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MemoryGameView(theme: Halloween())
+        let view = MemoryGameView(theme: Halloween())
+        view.game.choose(card: view.game.cards[0])
+        return view
     }
 }

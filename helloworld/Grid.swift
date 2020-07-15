@@ -12,7 +12,10 @@ struct Grid<Item, ItemView>: View where Item:Identifiable, ItemView: View {
     var items: Array<Item>
     var viewForItem: (Item) -> ItemView
     
-    // escaping means I don't know what is going to happen to this function
+    // Declaring a function as escaping means tells the compiler
+    // that this function is not going to be executed right away
+    // and it will be used later at some point.
+    // This is because this tells the compiler that references
     init(items: [Item], viewForItem: @escaping (Item) -> ItemView) {
         self.items = items
         self.viewForItem = viewForItem
@@ -32,6 +35,9 @@ struct Grid<Item, ItemView>: View where Item:Identifiable, ItemView: View {
     }
     
     func body(_ item: Item, layout: GridLayout) -> some View {
+        // Body for an item takes an item and calls viewForItem() which renders the view
+        // .frame offers a specific size to the view.
+        // Grid layout here is giving us the width, height and the position
         viewForItem(item)
             .frame(width: layout.itemSize.width, height: layout.itemSize.height)
             .position(layout.location(ofItemAt: items.firstIndex(item)!))
