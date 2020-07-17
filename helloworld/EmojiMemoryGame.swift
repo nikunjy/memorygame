@@ -17,6 +17,7 @@ class EmojiMemoryGame: ObservableObject {
     
     static func createMemoryGame(emojis: [String]) -> MemoryGame<String> {
         let numPairs = Int.random(in: 3 ..< emojis.count)
+        //let numPairs = 3
         return MemoryGame<String>(numPairs: numPairs) { index  in
             return emojis[index]
         }
@@ -41,5 +42,9 @@ class EmojiMemoryGame: ObservableObject {
     
     func choose(card: MemoryGame<String>.Card) {
         game.choose(card: card)
+    }
+    
+    func isFinished() -> Bool {
+        return game.isFinished
     }
 }

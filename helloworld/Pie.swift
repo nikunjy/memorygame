@@ -12,6 +12,16 @@ struct Pie: Shape {
     var startAngle: Angle
     var endAngle: Angle
     var clockWise: Bool = false
+    
+    // animatableData is tricky. Somehow when this returns Angle
+    // this doesn't work
+    var animatableData: Double {
+        get { endAngle.radians}
+        set {
+            endAngle = Angle.radians(newValue)
+        }
+    }
+    
     func path(in rect: CGRect) -> Path {
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = min(rect.width, rect.height) / 2

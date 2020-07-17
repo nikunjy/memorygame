@@ -13,6 +13,7 @@ struct MemoryGameView: View {
     init(theme: Theme) {
         game = EmojiMemoryGame(theme: theme)
     }
+    
     var body: some View {
         VStack{
             HStack{
@@ -31,15 +32,29 @@ struct MemoryGameView: View {
                         .stroke(Color.purple, lineWidth: 5)
                 )
             }
-            Grid(items: game.cards) { card in
-                CardView(card: card).onTapGesture(perform: {
-                    self.game.choose(card: card)
-                })
-                .padding()
-                .foregroundColor(self.game.cardColor())
+            if !game.isFinished() {
+                Grid(items: game.cards) { card in
+                    CardView(card: card).onTapGesture(perform: {
+                        // Explicity animation on tapping
+                        // Slow down the duration
+                        withAnimation(.linear(duration: 0.5)) {
+                            self.game.choose(card: card)
+                        }
+                    })
+                        .padding()
+                        .foregroundColor(self.game.cardColor())
+                }
+            } else {
+                Text("🥂").font(.largeTitle).transition(.scale).animation(.linear(duration: 2))
             }
         }
     }
+    
+    func fontSize(_ size: CGSize) -> CGFloat {
+        return min(size.width, size.height) * fontScaleFactor
+    }
+    
+    let fontScaleFactor : CGFloat = 0.20
     
     func chooseTheme() {
         let theme = Themes.random()
@@ -56,16 +71,38 @@ struct CardView: View {
         }
     }
     
+    @State private var bonusRemaining: Double = 1
+    
+    private func startBonusTimeRemaining() {
+        bonusRemaining = card.bonusRemaining
+        withAnimation(.linear(duration: card.bonusTimeRemaining)) {
+            bonusRemaining = 0
+        }
+    }
+    
+    @ViewBuilder
     func render(size: CGSize) -> some View {
         ZStack {
-                Pie(
-                    startAngle: Angle.degrees(-90),
-                    endAngle: Angle.degrees(60),
-                    clockWise: true
-                ).padding(3).opacity(0.25)
+            Group {
+                if card.isConsumingBonusTime{
+                    Pie(
+                        startAngle: Angle.degrees(-90),
+                        endAngle: Angle.degrees(-bonusRemaining * 360-90),
+                        clockWise: true
+                    ).onAppear{
+                        self.startBonusTimeRemaining()
+                    }
+                } else {
+                    Pie(
+                        startAngle: Angle.degrees(-90),
+                        endAngle: Angle.degrees(-card.bonusRemaining * 360-90),
+                        clockWise: true
+                    )
+                }
+            }.padding(3).opacity(0.25)
             Text(card.content)
         }.cardify(isFaceUp: card.isFaceUp)
-        .font(Font.system(size: fontSize(size)))
+            .font(Font.system(size: fontSize(size)))
     }
     
     func fontSize(_ size: CGSize) -> CGFloat {
